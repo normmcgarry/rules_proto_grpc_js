@@ -1,0 +1,5 @@
+bazel-*
+node_modules
+.bazelrc.user
+MODULE.bazel.lock
+.aspect
