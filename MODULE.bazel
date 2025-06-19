@@ -13,22 +13,16 @@ bazel_dep(name = "rules_cc", version = "0.1.1")
 bazel_dep(name = "rules_pkg", version = "1.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "zlib", version = "1.3.1.bcr.6")
+bazel_dep(name = "protobuf", version = "31.1")
+bazel_dep(name = "protobuf_javascript", version = "0.0.0", repo_name = "com_google_protobuf_javascript")
 
 http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_file = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 
-http_archive(
-    name = "com_google_protobuf_javascript",
-    strip_prefix = "protobuf-javascript-3.21.2",
-    urls = ["https://github.com/protocolbuffers/protobuf-javascript/archive/v3.21.2.tar.gz"],
-    sha256 = "35bca1729532b0a77280bf28ab5937438e3dcccd6b31a282d9ae84c896b6f6e3",
-)
-
-http_archive(
-    name = "com_google_protobuf",
-    strip_prefix = "protobuf-21.10",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/v21.10.tar.gz"],
-    sha256 = "f3f9ce6dc288f2f939bdc9d277ebdfbc8dbcd51741071f93da70e0e62919f57f",
+git_override(
+    module_name = "protobuf_javascript",
+    commit = "f418f587e0588481a3557eeddc5646c3566fbbe3",
+    remote = "https://github.com/protocolbuffers/protobuf-javascript",
 )
 
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm")
